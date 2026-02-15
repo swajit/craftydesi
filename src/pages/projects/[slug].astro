@@ -1,0 +1,177 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.id.split('/')[0] },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const slug = project.id.split('/')[0];
+const title = slug.replace(/-/g, ' ');
+
+// Dynamically discover images for this project
+// We assume images are in /projects/[slug]/ and we'll look for common extensions
+const allImages = import.meta.glob('/projects/**/*.{png,jpg,jpeg,webp}', { eager: true });
+const projectImages = Object.keys(allImages)
+  .filter(path => path.includes(`/projects/${slug}/`))
+  .map(path => (allImages[path] as any).default);
+
+---
+
+<Layout title={title}>
+	<article class="project-detail">
+		<header class="project-header">
+			<div class="container">
+				<a href="/craftydesi/projects" class="back-link">&larr; Back to Projects</a>
+				<h1>{title}</h1>
+				{project.data.tags && (
+					<div class="tags">
+						{project.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+					</div>
+				)}
+			</div>
+		</header>
+
+		<div class="container">
+			<div class="project-layout">
+				<div class="project-main">
+					<div class="project-content content">
+						<Content />
+					</div>
+					
+					{projectImages.length > 0 && (
+						<div class="project-gallery">
+							<h2>Project Gallery</h2>
+							<div class="gallery-grid">
+								{projectImages.map((img, index) => (
+									<div class="gallery-item">
+										<img src={img.src} alt={`${title} gallery image ${index + 1}`} loading="lazy" />
+									</div>
+								))}
+							</div>
+						</div>
+					)}
+				</div>
+
+				<aside class="project-sidebar">
+					<div class="sidebar-card">
+						<h3>Interested?</h3>
+						<p>Every piece is custom made. If you like this style, let's talk about building one for you.</p>
+						<a href="/craftydesi/contact" class="btn btn-primary">Request Similar Project</a>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</article>
+
+	<style>
+		.project-header {
+			padding: 4rem 0 2rem;
+			background: var(--color-surface);
+			border-bottom: 1px solid var(--color-border);
+		}
+		.back-link {
+			color: var(--color-primary);
+			font-weight: 500;
+			display: inline-block;
+			margin-bottom: 1.5rem;
+		}
+		.project-header h1 {
+			font-size: 3.5rem;
+			text-transform: capitalize;
+			color: var(--color-primary-dark);
+			margin-bottom: 1rem;
+		}
+		.tags {
+			display: flex;
+			gap: 0.5rem;
+		}
+		.tag {
+			background: var(--color-accent);
+			color: var(--color-primary-dark);
+			padding: 0.25rem 0.75rem;
+			border-radius: 100px;
+			font-size: 0.875rem;
+			font-weight: 500;
+		}
+
+		.project-layout {
+			display: grid;
+			grid-template-columns: 2fr 1fr;
+			gap: 4rem;
+			padding-top: 4rem;
+		}
+
+		/* Generic Markdown Styles */
+		.content :global(h1), .content :global(h2), .content :global(h3) {
+			margin: 2rem 0 1rem;
+			color: var(--color-primary-dark);
+		}
+		.content :global(p) {
+			margin-bottom: 1.5rem;
+			font-size: 1.125rem;
+		}
+
+		.project-gallery {
+			margin-top: 4rem;
+			padding-top: 4rem;
+			border-top: 1px solid var(--color-border);
+		}
+		.project-gallery h2 {
+			margin-bottom: 2rem;
+		}
+		.gallery-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: 1.5rem;
+		}
+		.gallery-item {
+			border-radius: 8px;
+			overflow: hidden;
+			background: var(--color-surface);
+			box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+		}
+		.gallery-item img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			aspect-ratio: 1;
+			transition: transform 0.3s ease;
+		}
+		.gallery-item:hover img {
+			transform: scale(1.05);
+		}
+
+		.sidebar-card {
+			background: var(--color-surface);
+			padding: 2rem;
+			border-radius: 8px;
+			border: 1px solid var(--color-border);
+			position: sticky;
+			top: 120px;
+		}
+		.sidebar-card h3 {
+			margin-bottom: 1rem;
+		}
+		.sidebar-card .btn {
+			width: 100%;
+			justify-content: center;
+		}
+
+		@media (max-width: 768px) {
+			.project-layout {
+				grid-template-columns: 1fr;
+			}
+			.project-header h1 {
+				font-size: 2.5rem;
+			}
+		}
+	</style>
+</Layout>

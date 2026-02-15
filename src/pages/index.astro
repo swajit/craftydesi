@@ -1,0 +1,247 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const featuredProjects = allProjects.filter(p => p.data.featured !== false).slice(0, 6);
+
+// Discovery logic for cover images
+const allImages = import.meta.glob('/projects/**/*.{png,jpg,jpeg,webp}', { eager: true });
+const getProjectCover = (slug: string) => {
+  const projectImgKeys = Object.keys(allImages).filter(path => path.includes(`/projects/${slug}/`));
+  if (projectImgKeys.length > 0) {
+    return (allImages[projectImgKeys[0]] as any).default.src;
+  }
+  return null;
+};
+---
+
+<Layout title="Home" description="Custom woodworking for modern living. Handcrafted furniture and accessories.">
+	<section class="hero">
+		<div class="container">
+			<div class="hero-content">
+				<h1>Crafting Beauty From <span>Nature's Canvas</span></h1>
+				<p>I build small and medium wood projects that blend traditional craftsmanship with modern design. Each piece is unique, handmade, and built to last.</p>
+				<div class="hero-actions">
+					<a href="/craftydesi/projects" class="btn btn-primary">View Projects</a>
+					<a href="/craftydesi/contact" class="btn btn-outline">Request a Quote</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="featured">
+		<div class="container">
+			<div class="section-header">
+				<h2>Featured Work</h2>
+				<a href="/craftydesi/projects" class="view-all">View all projects &rarr;</a>
+			</div>
+			
+			<div class="featured-scroll-container">
+				<div class="featured-grid">
+					{featuredProjects.map(project => {
+						const slug = project.id.split('/')[0];
+						const title = slug.replace(/-/g, ' ');
+						const cover = getProjectCover(slug);
+						return (
+							<a href={`/craftydesi/projects/${slug}`} class="featured-card">
+								<div class="card-image">
+									{cover ? (
+										<img src={cover} alt={title} loading="lazy" />
+									) : (
+										<div class="card-image-placeholder"></div>
+									)}
+								</div>
+								<div class="card-content">
+									<h3>{title}</h3>
+									<p>Handmade excellence</p>
+								</div>
+							</a>
+						);
+					})}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="philosophy">
+		<div class="container">
+			<div class="philosophy-grid">
+				<div class="philosophy-text">
+					<h2>My Philosophy</h2>
+					<p>Woodworking is more than just building things; it's about respecting the material and creating something that tells a story. I focus on sustainable sourcing and meticulous attention to detail.</p>
+					<ul class="features">
+						<li><strong>Hand-Selected Lumber:</strong> Every board is chosen for its grain and character.</li>
+						<li><strong>Traditional Joinery:</strong> Built with techniques that stand the test of time.</li>
+						<li><strong>Natural Finishes:</strong> Safe, durable, and beautiful finishes.</li>
+					</ul>
+				</div>
+				<div class="philosophy-image">
+					<img src="/craftydesi/images/site/philosophy.png" alt="Woodworking craftsmanship" class="philosophy-img" />
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<style>
+		.hero {
+			padding: 4rem 0 2rem 0;
+			background: linear-gradient(rgba(253, 250, 247, 0.8), rgba(253, 250, 247, 0.8)), url('https://images.unsplash.com/photo-1581450284507-68b200b33100?auto=format&fit=crop&q=80&w=2000') center/cover;
+			text-align: center;
+		}
+		.featured {
+			padding-top: 1rem;
+		}
+		.hero-content {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		.hero h1 {
+			font-size: clamp(2.5rem, 8vw, 4rem);
+			margin-bottom: 1.5rem;
+			color: var(--color-primary-dark);
+		}
+		.hero h1 span {
+			color: var(--color-primary);
+		}
+		.hero p {
+			font-size: 1.25rem;
+			color: var(--color-muted);
+			margin-bottom: 2.5rem;
+		}
+		.hero-actions {
+			display: flex;
+			justify-content: center;
+			gap: 1.5rem;
+		}
+
+		.section-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			margin-bottom: 3rem;
+		}
+		.view-all {
+			color: var(--color-primary);
+			font-weight: 500;
+		}
+
+		/* Featured Projects with Horizontal Scroll */
+	.featured-scroll-container {
+		margin: 0 calc(var(--container-padding) * -1);
+		padding: 0 var(--container-padding) 2rem;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+	}
+	.featured-scroll-container::-webkit-scrollbar {
+		height: 8px;
+	}
+	.featured-scroll-container::-webkit-scrollbar-track {
+		background: var(--color-accent);
+		border-radius: 10px;
+	}
+	.featured-scroll-container::-webkit-scrollbar-thumb {
+		background: var(--color-primary-light);
+		border-radius: 10px;
+	}
+	.featured-grid {
+		display: flex;
+		gap: 2rem;
+		width: max-content;
+		padding: 1rem 0;
+	}
+	.featured-card {
+		scroll-snap-align: start;
+		flex: 0 0 350px;
+		background: var(--color-surface);
+		border-radius: 12px;
+		overflow: hidden;
+		border: 1px solid var(--color-border);
+		transition: var(--transition);
+		text-decoration: none;
+		color: inherit;
+		display: flex;
+		flex-direction: column;
+	}
+		.project-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+			gap: 2rem;
+		}
+		.project-card {
+			aspect-ratio: 4/5;
+			background: var(--color-accent);
+			border-radius: 8px;
+			overflow: hidden;
+			position: relative;
+			display: flex;
+			align-items: flex-end;
+			padding: 2rem;
+			color: white;
+		}
+		.project-card::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+		}
+		.project-info {
+			position: relative;
+			z-index: 1;
+		}
+		.project-info h3 {
+			font-size: 1.5rem;
+			text-transform: capitalize;
+		}
+
+		.philosophy-grid {
+			display: grid;
+			grid-template-columns: 1.2fr 1fr;
+			gap: 4rem;
+			align-items: center;
+		}
+		.philosophy h2 {
+			font-size: 2.5rem;
+			margin-bottom: 1.5rem;
+		}
+		.philosophy p {
+			font-size: 1.125rem;
+			margin-bottom: 2rem;
+			color: var(--color-muted);
+		}
+		.features {
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+		}
+		.features li {
+			padding-left: 1.5rem;
+			position: relative;
+		}
+		.features li::before {
+			content: '✓';
+			position: absolute;
+			left: 0;
+			color: var(--color-primary);
+			font-weight: bold;
+		}
+		.philosophy-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 8px;
+			aspect-ratio: 4/3;
+		}
+
+		@media (max-width: 768px) {
+			.philosophy-grid {
+				grid-template-columns: 1fr;
+			}
+			.hero-actions {
+				flex-direction: column;
+			}
+		}
+	</style>
+</Layout>

@@ -1,0 +1,286 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const allTags = [...new Set(allProjects.flatMap(p => p.data.tags || []))];
+
+// Discovery logic for cover images
+const allImages = import.meta.glob('/projects/**/*.{png,jpg,jpeg,webp}', { eager: true });
+const getProjectCover = (slug: string) => {
+  const projectImgKeys = Object.keys(allImages).filter(path => path.includes(`/projects/${slug}/`));
+  if (projectImgKeys.length > 0) {
+    return (allImages[projectImgKeys[0]] as any).default.src;
+  }
+  return null;
+};
+---
+
+<Layout title="Projects" description="Explore our portfolio of handcrafted wood furniture and decor.">
+	<section class="projects-hero">
+		<div class="container text-center">
+			<h1>Portfolio of Work</h1>
+			<p>A collection of {allProjects.length} projects exploring different woods, techniques, and styles.</p>
+		</div>
+	</section>
+
+	<section class="projects-filter">
+		<div class="container">
+			<div class="filter-controls">
+				<div class="tag-filters" id="tagFilters">
+					<button class="filter-btn active" data-tag="all">All Projects</button>
+					{allTags.map(tag => (
+						<button class="filter-btn" data-tag={tag}>{tag}</button>
+					))}
+				</div>
+				<div class="search-box">
+					<input type="text" id="projectSearch" placeholder="Search projects..." />
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="projects-list">
+		<div class="container">
+			<div class="project-grid" id="projectGrid">
+				{allProjects.map(project => {
+					const slug = project.id.split('/')[0];
+					const title = slug.replace(/-/g, ' ');
+					const cover = getProjectCover(slug);
+					const tags = project.data.tags || [];
+					
+					return (
+						<a 
+							href={`/craftydesi/projects/${slug}`} 
+							class="project-card" 
+							data-tags={JSON.stringify(tags)}
+							data-title={title.toLowerCase()}
+						>
+							<div class="project-image">
+								{cover ? (
+									<img src={cover} alt={title} loading="lazy" />
+								) : (
+									<div class="project-image-placeholder"></div>
+								)}
+							</div>
+							<div class="project-info">
+								<div class="project-header-small">
+									<h3>{title}</h3>
+								</div>
+								{tags.length > 0 && (
+									<div class="project-tags">
+										{tags.slice(0, 2).map(tag => <span class="tag">{tag}</span>)}
+										{tags.length > 2 && <span class="tag">+{tags.length - 2}</span>}
+									</div>
+								)}
+							</div>
+						</a>
+					);
+				})}
+			</div>
+			
+			<div id="noResults" class="no-results hidden">
+				<p>No projects found matching your criteria.</p>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		const searchInput = document.getElementById('projectSearch') as HTMLInputElement;
+		const tagButtons = document.querySelectorAll('.filter-btn');
+		const projectCards = document.querySelectorAll('.project-card') as NodeListOf<HTMLElement>;
+		const noResults = document.getElementById('noResults');
+
+		let currentFilter = 'all';
+		let searchQuery = '';
+
+		function updateVisibility() {
+			let visibleCount = 0;
+			
+			projectCards.forEach(card => {
+				const title = card.dataset.title || '';
+				const tags = JSON.parse(card.dataset.tags || '[]');
+				
+				const matchesFilter = currentFilter === 'all' || tags.includes(currentFilter);
+				const matchesSearch = title.includes(searchQuery.toLowerCase());
+				
+				if (matchesFilter && matchesSearch) {
+					card.classList.remove('hidden');
+					visibleCount++;
+				} else {
+					card.classList.add('hidden');
+				}
+			});
+
+			if (visibleCount === 0) {
+				noResults?.classList.remove('hidden');
+			} else {
+				noResults?.classList.add('hidden');
+			}
+		}
+
+		searchInput?.addEventListener('input', (e) => {
+			searchQuery = (e.target as HTMLInputElement).value;
+			updateVisibility();
+		});
+
+		tagButtons.forEach(btn => {
+			btn.addEventListener('click', () => {
+				tagButtons.forEach(b => b.classList.remove('active'));
+				btn.classList.add('active');
+				currentFilter = (btn as HTMLElement).dataset.tag || 'all';
+				updateVisibility();
+			});
+		});
+	</script>
+
+	<style>
+		.projects-hero {
+			padding: 3rem 0 2rem;
+			background: var(--color-surface);
+		}
+		.text-center {
+			text-align: center;
+		}
+		.projects-hero h1 {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+		}
+		.projects-hero p {
+			font-size: 1.25rem;
+			color: var(--color-muted);
+		}
+
+		.projects-filter {
+			padding: 2rem 0;
+			background: var(--color-bg);
+			border-top: 1px solid var(--color-border);
+			border-bottom: 1px solid var(--color-border);
+			position: sticky;
+			top: 80px;
+			z-index: 50;
+		}
+		.filter-controls {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			gap: 2rem;
+		}
+		.tag-filters {
+			display: flex;
+			gap: 0.75rem;
+			flex-wrap: wrap;
+		}
+		.filter-btn {
+			padding: 0.5rem 1rem;
+			border-radius: 100px;
+			border: 1px solid var(--color-border);
+			background: var(--color-surface);
+			cursor: pointer;
+			font-weight: 500;
+			transition: var(--transition);
+		}
+		.filter-btn:hover {
+			border-color: var(--color-primary);
+			color: var(--color-primary);
+		}
+		.filter-btn.active {
+			background: var(--color-primary);
+			color: white;
+			border-color: var(--color-primary);
+		}
+		.search-box input {
+			padding: 0.6rem 1.2rem;
+			border-radius: 100px;
+			border: 1px solid var(--color-border);
+			min-width: 300px;
+		}
+
+		.projects-list {
+			padding: 4rem 0;
+		}
+		.project-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+			gap: 2rem;
+		}
+		.project-card {
+			background: var(--color-surface);
+			border-radius: 8px;
+			overflow: hidden;
+			border: 1px solid var(--color-border);
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			display: flex;
+			flex-direction: column;
+		}
+		.project-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+		}
+		.project-card.hidden {
+			display: none;
+		}
+		.project-image {
+			aspect-ratio: 4/3;
+			overflow: hidden;
+			background: var(--color-accent);
+		}
+		.project-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+		.project-image-placeholder {
+			width: 100%;
+			height: 100%;
+			background-image: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary-light) 100%);
+		}
+		.project-info {
+			padding: 1.25rem;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		.project-info h3 {
+			font-size: 1.25rem;
+			text-transform: capitalize;
+			color: var(--color-primary-dark);
+			margin-bottom: 0.75rem;
+		}
+		.project-tags {
+			display: flex;
+			gap: 0.4rem;
+			flex-wrap: wrap;
+		}
+		.tag {
+			background: #f0f0f0;
+			color: #666;
+			font-size: 0.75rem;
+			padding: 0.2rem 0.5rem;
+			border-radius: 4px;
+		}
+		.no-results {
+			text-align: center;
+			padding: 3rem;
+			color: var(--color-muted);
+			font-size: 1.25rem;
+		}
+		.hidden {
+			display: none;
+		}
+
+		@media (max-width: 768px) {
+			.filter-controls {
+				flex-direction: column;
+				align-items: stretch;
+			}
+			.search-box input {
+				width: 100%;
+			}
+			.projects-filter {
+				top: 70px;
+			}
+		}
+	</style>
+</Layout>

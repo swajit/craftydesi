@@ -1,0 +1,164 @@
+---
+import '../styles/index.css';
+import { ViewTransitions } from 'astro:transitions';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Premium Handcrafted Woodworking Projects" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | CraftyDesi Woodworking</title>
+		<meta name="description" content={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+		<ViewTransitions />
+	</head>
+	<body>
+		<header class="header">
+			<nav class="container">
+				<a href="/craftydesi/" class="logo">
+					<img src="/craftydesi/images/site/logo.png" alt="CraftyDesi Logo" class="logo-img" />
+				</a>
+				<ul class="nav-links">
+					<li><a href="/craftydesi/">Home</a></li>
+					<li><a href="/craftydesi/projects">Projects</a></li>
+					<li><a href="/craftydesi/about">About</a></li>
+					<li><a href="/craftydesi/contact" class="btn btn-primary">Request Quote</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer class="footer">
+			<div class="container">
+				<div class="footer-content">
+					<div class="footer-brand">
+						<a href="/craftydesi/" class="logo">
+							<img src="/craftydesi/images/site/logo.png" alt="CraftyDesi Logo" class="logo-img-footer" />
+						</a>
+						<p>Handmade excellence in every grain.</p>
+					</div>
+					<div class="footer-links">
+						<h4>Quick Links</h4>
+						<ul>
+							<li><a href="/craftydesi/projects">Our Work</a></li>
+							<li><a href="/craftydesi/about">Process</a></li>
+							<li><a href="/craftydesi/contact">Get a Quote</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<p>&copy; {new Date().getFullYear()} CraftyDesi Woodworking. All rights reserved.</p>
+				</div>
+			</div>
+		</footer>
+
+		<style>
+			.header {
+				padding: 0.5rem 0;
+				background: var(--color-surface);
+				border-bottom: 1px solid var(--color-border);
+				position: sticky;
+				top: 0;
+				z-index: 100;
+			}
+			.header nav {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.logo {
+				display: flex;
+				align-items: center;
+			}
+			.logo-img {
+				height: 65px;
+				width: auto;
+				display: block;
+			}
+			.logo-img-footer {
+				height: 50px;
+				width: auto;
+				display: block;
+			}
+			.nav-links {
+				display: flex;
+				align-items: center;
+				gap: 2rem;
+				list-style: none;
+			}
+			.nav-links a:not(.btn) {
+				font-weight: 500;
+				color: var(--color-muted);
+			}
+			.nav-links a:hover:not(.btn) {
+				color: var(--color-primary);
+			}
+
+			.footer {
+				background: var(--color-surface);
+				border-top: 1px solid var(--color-border);
+				padding: 4rem 0 2rem;
+				margin-top: 4rem;
+			}
+			.footer-content {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 4rem;
+				margin-bottom: 3rem;
+			}
+			.footer-brand p {
+				margin-top: 1rem;
+				color: var(--color-muted);
+			}
+			.footer-links h4 {
+				margin-bottom: 1.5rem;
+				color: var(--color-primary-dark);
+			}
+			.footer-links ul {
+				list-style: none;
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+			}
+			.footer-links a {
+				color: var(--color-muted);
+			}
+			.footer-links a:hover {
+				color: var(--color-primary);
+			}
+			.footer-bottom {
+				border-top: 1px solid var(--color-border);
+				padding-top: 2rem;
+				text-align: center;
+				color: var(--color-muted);
+				font-size: 0.875rem;
+			}
+
+			@media (max-width: 768px) {
+				.nav-links {
+					gap: 1rem;
+				}
+				.nav-links a:not(.btn) {
+					display: none;
+				}
+				.footer-content {
+					grid-template-columns: 1fr;
+					gap: 2rem;
+				}
+			}
+		</style>
+	</body>
+</html>
