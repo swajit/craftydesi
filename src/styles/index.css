@@ -5,10 +5,12 @@
   /* Wood-inspired color palette */
   --color-bg: #fdfaf7;
   --color-text: #2d241e;
-  --color-primary: #8b5e3c; /* Warm brown */
+  --color-primary: #8b5e3c;
+  /* Warm brown */
   --color-primary-light: #bc8a5f;
   --color-primary-dark: #5d4037;
-  --color-accent: #d2b48c; /* Tan/Oak */
+  --color-accent: #d2b48c;
+  /* Tan/Oak */
   --color-muted: #7d6e64;
   --color-surface: #ffffff;
   --color-border: #e6ded6;
@@ -18,17 +20,6 @@
   --transition: all 0.3s ease;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #1a1614;
-    --color-text: #e6ded6;
-    --color-primary: #bc8a5f;
-    --color-accent: #8b5e3c;
-    --color-muted: #a89a90;
-    --color-surface: #2d241e;
-    --color-border: #3d342d;
-  }
-}
 
 * {
   box-sizing: border-box;
@@ -44,7 +35,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-serif);
   font-weight: 600;
   line-height: 1.2;
