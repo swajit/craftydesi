@@ -1,6 +1,6 @@
 ---
 title: Vartical Mandir
-tags: ["Mandir", "Traditional"
+tags: ["Mandir", "Traditional"]
 featured: true
 ---
 # Vertical Mandir
