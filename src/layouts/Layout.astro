@@ -160,5 +160,28 @@ const { title, description = "Premium Handcrafted Woodworking Projects" } = Astr
 				}
 			}
 		</style>
+		<script>
+			// Global image protection for specific surfaces
+			const protectedSelectors = [
+				'.gallery-item', 
+				'.modal-content', 
+				'.featured-card',
+				'.project-card'
+			];
+
+			document.addEventListener('contextmenu', (e) => {
+				const target = e.target as HTMLElement;
+				if (protectedSelectors.some(selector => target.closest(selector))) {
+					e.preventDefault();
+				}
+			}, false);
+
+			document.addEventListener('dragstart', (e) => {
+				const target = e.target as HTMLElement;
+				if (protectedSelectors.some(selector => target.closest(selector))) {
+					e.preventDefault();
+				}
+			}, false);
+		</script>
 	</body>
 </html>

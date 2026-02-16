@@ -46,6 +46,7 @@ const getProjectCover = (slug: string) => {
 						return (
 							<a href={`/craftydesi/projects/${slug}`} class="featured-card">
 								<div class="card-image">
+									<div class="protection-overlay"></div>
 									{cover ? (
 										<img src={cover} alt={title} loading="lazy" />
 									) : (
@@ -163,6 +164,24 @@ const getProjectCover = (slug: string) => {
 		color: inherit;
 		display: flex;
 		flex-direction: column;
+	}
+	.card-image {
+		position: relative;
+		aspect-ratio: 4/3;
+		overflow: hidden;
+	}
+	.card-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		user-select: none;
+		-webkit-user-drag: none;
+	}
+	.protection-overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		background: transparent;
 	}
 		.project-grid {
 			display: grid;

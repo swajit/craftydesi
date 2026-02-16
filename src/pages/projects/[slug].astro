@@ -53,6 +53,7 @@ const projectImages = Object.keys(allImages)
 							<div class="gallery-grid">
 								{projectImages.map((img, index) => (
 									<div class="gallery-item">
+										<div class="gallery-protection-overlay"></div>
 										<img src={img.src} alt={`${title} gallery image ${index + 1}`} loading="lazy" />
 									</div>
 								))}
@@ -138,6 +139,7 @@ const projectImages = Object.keys(allImages)
 			overflow: hidden;
 			background: var(--color-surface);
 			box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+			position: relative;
 		}
 		.gallery-item img {
 			width: 100%;
@@ -146,6 +148,14 @@ const projectImages = Object.keys(allImages)
 			aspect-ratio: 1;
 			transition: transform 0.3s ease;
 			cursor: pointer;
+			user-select: none;
+			-webkit-user-drag: none;
+		}
+		.gallery-protection-overlay {
+			position: absolute;
+			inset: 0;
+			z-index: 2;
+			background: transparent;
 		}
 		.gallery-item:hover img {
 			transform: scale(1.05);
