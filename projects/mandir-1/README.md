@@ -1,17 +1,17 @@
 ---
-title: Mandir Design 1
-tags: ["Mandir", "Traditional"]
+title: Classic Mandir Design 1
+tags: ["Mandir", "Traditional", "Craftsmanship"]
 featured: true
 ---
-# Mandir Design 1
+# Classic Mandir Design 1
 
-A sleek, traditional Mandir designed to accomodate dieties / murtis at lower level, and various size frames at the top. Some of the shelves are adjustable to fit any size frame.
+A sleek, traditional Mandir designed to accommodate deities/murtis at the lower level and various size frames at the top. This design is a perfect blend of functionality and spiritual elegance.
 
 ## Features
+- **Adjustable Shelving:** Flexible top shelves to fit any size frame or artifact.
 - **Sustainably Sourced Birch Plywood:** Hand-selected for its rich grain and even thickness.
-- **Hidden light fixtures:** Keeps the mandir lighted and looks elegant.
-- **Natural Oil Finish:** Enhances the wood's natural beauty while providing durable protection.
-- **Minimalist Design:** Fits perfectly in any traditional home
+- **Integrated Light Fixtures:** Bespoke lighting setup to keep the mandir elegantly lit.
+- **Sleek Oil Finish:** Enhances the natural wood beauty with lasting protection.
 
 ## The Process
-Coming soon.
+Every joint was meticulously planned and executed to ensure a seamless look. The focus was on "invisible" construction that lets the wood grain speak for itself.

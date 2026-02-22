@@ -1,17 +1,17 @@
 ---
-title: Mandir Platform 2
-tags: ["Mandir", "Traditional"]
-featured: true
+title: Custom Mandir Platform 2
+tags: ["Mandir", "Platform", "Handcrafted"]
+featured: false
 ---
-# Mandir Platform 2
+# Custom Mandir Platform 2
 
-A sleek, traditional Mandir designed to accomodate dieties / murtis at lower level, and various size frames at the top. Some of the shelves are adjustable to fit any size frame.
+An evolution of our platform design, this version includes additional depth and subtle styling cues that make it a perfect standalone base for your home altar. Designed to elevate and protect your sacred space.
 
 ## Features
-- **Sustainably Sourced Birch Plywood:** Hand-selected for its rich grain and even thickness.
-- **Hidden light fixtures:** Keeps the mandir lighted and looks elegant.
-- **Natural Oil Finish:** Enhances the wood's natural beauty while providing durable protection.
-- **Minimalist Design:** Fits perfectly in any traditional home
+- **Enriched Profile:** Subtle beveling for a more refined look.
+- **Reinforced Top:** Designed to safely hold heavier brass murtis.
+- **Seamless Finish:** No visible screws or fasteners for a monolithic appearance.
+- **Satin Wood Finish:** A smooth, tactile surface that is easy to keep clean.
 
 ## The Process
-Coming soon.
+We used a "waterfall" edge technique on several prototypes before landing on this design, which balances modern manufacturing with traditional "V" grooving techniques.

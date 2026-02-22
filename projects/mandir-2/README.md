@@ -1,17 +1,17 @@
 ---
 title: Mandir Design 2
-tags: ["Mandir", "Traditional"]
-featured: true
+tags: ["Mandir", "Custom", "Oak"]
+featured: false
 ---
 # Mandir Design 2
 
-A sleek, traditional Mandir designed to accomodate dieties / murtis at lower level, and various size frames at the top. Some of the shelves are adjustable to fit any size frame.
+A sturdy and elegant mandir that brings warmth to any prayer room. This design focuses on a robust frame and clear visibility of the central deities, featuring a beautiful natural finish that ages gracefully.
 
 ## Features
-- **Sustainably Sourced Birch Plywood:** Hand-selected for its rich grain and even thickness.
-- **Hidden light fixtures:** Keeps the mandir lighted and looks elegant.
-- **Natural Oil Finish:** Enhances the wood's natural beauty while providing durable protection.
-- **Minimalist Design:** Fits perfectly in any traditional home
+- **Solid Construction:** Built for longevity and stability.
+- **Wide Display Area:** Perfect for larger murtis or multiple photo frames.
+- **Hand-Finished Detail:** Carefully sanded and oiled for a smooth touch.
+- **Elevated Base:** Adds a sense of importance and presence to the unit.
 
 ## The Process
-Coming soon.
+Starting with raw birch plywood, we focused on strong joinery and a flawless finish. The result is a piece that is as functional as it is beautiful.
