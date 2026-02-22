@@ -41,7 +41,7 @@ const getProjectCover = (slug: string) => {
 				<div class="featured-grid">
 					{featuredProjects.map(project => {
 						const slug = project.id.split('/')[0];
-						const title = slug.replace(/-/g, ' ');
+						const title = project.data.title || slug.replace(/-/g, ' ');
 						const cover = getProjectCover(slug);
 						return (
 							<a href={`/projects/${slug}`} class="featured-card">
@@ -211,7 +211,6 @@ const getProjectCover = (slug: string) => {
 		}
 		.project-info h3 {
 			font-size: 1.5rem;
-			text-transform: capitalize;
 		}
 
 		.philosophy-grid {

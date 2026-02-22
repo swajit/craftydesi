@@ -45,7 +45,7 @@ const getProjectCover = (slug: string) => {
 			<div class="project-grid" id="projectGrid">
 				{allProjects.map(project => {
 					const slug = project.id.split('/')[0];
-					const title = slug.replace(/-/g, ' ');
+					const title = project.data.title || slug.replace(/-/g, ' ');
 					const cover = getProjectCover(slug);
 					const tags = project.data.tags || [];
 					
@@ -254,7 +254,6 @@ const getProjectCover = (slug: string) => {
 		}
 		.project-info h3 {
 			font-size: 1.25rem;
-			text-transform: capitalize;
 			color: var(--color-primary-dark);
 			margin-bottom: 0.75rem;
 		}

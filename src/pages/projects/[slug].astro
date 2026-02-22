@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 const slug = project.id.split('/')[0];
-const title = slug.replace(/-/g, ' ');
+const title = project.data.title || slug.replace(/-/g, ' ');
 
 // Dynamically discover images for this project
 // We assume images are in /projects/[slug]/ and we'll look for common extensions
@@ -87,7 +87,6 @@ const projectImages = Object.keys(allImages)
 		}
 		.project-header h1 {
 			font-size: 3.5rem;
-			text-transform: capitalize;
 			color: var(--color-primary-dark);
 			margin-bottom: 1rem;
 		}
