@@ -23,8 +23,8 @@ const getProjectCover = (slug: string) => {
 				<h1>Crafting Beauty From <span>Nature's Canvas</span></h1>
 				<p>I build small and medium wood projects that blend traditional craftsmanship with modern design. Each piece is unique, handmade, and built to last.</p>
 				<div class="hero-actions">
-					<a href="/craftydesi/projects" class="btn btn-primary">View Projects</a>
-					<a href="/craftydesi/contact" class="btn btn-outline">Request a Quote</a>
+					<a href="/projects" class="btn btn-primary">View Projects</a>
+					<a href="/contact" class="btn btn-outline">Request a Quote</a>
 				</div>
 			</div>
 		</div>
@@ -34,7 +34,7 @@ const getProjectCover = (slug: string) => {
 		<div class="container">
 			<div class="section-header">
 				<h2>Featured Work</h2>
-				<a href="/craftydesi/projects" class="view-all">View all projects &rarr;</a>
+				<a href="/projects" class="view-all">View all projects &rarr;</a>
 			</div>
 			
 			<div class="featured-scroll-container">
@@ -44,7 +44,7 @@ const getProjectCover = (slug: string) => {
 						const title = slug.replace(/-/g, ' ');
 						const cover = getProjectCover(slug);
 						return (
-							<a href={`/craftydesi/projects/${slug}`} class="featured-card">
+							<a href={`/projects/${slug}`} class="featured-card">
 								<div class="card-image">
 									<div class="protection-overlay"></div>
 									{cover ? (
@@ -78,7 +78,7 @@ const getProjectCover = (slug: string) => {
 					</ul>
 				</div>
 				<div class="philosophy-image">
-					<img src="/craftydesi/images/site/philosophy.png" alt="Woodworking craftsmanship" class="philosophy-img" />
+					<img src="/images/site/philosophy.png" alt="Woodworking craftsmanship" class="philosophy-img" />
 				</div>
 			</div>
 		</div>
