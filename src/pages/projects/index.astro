@@ -3,7 +3,16 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
-const allTags = [...new Set(allProjects.flatMap(p => p.data.tags || []))];
+const tagCounts = allProjects.flatMap(p => p.data.tags || []).reduce((acc, tag) => {
+  acc[tag] = (acc[tag] || 0) + 1;
+  return acc;
+}, {} as Record<string, number>);
+
+const allTags = Object.entries(tagCounts)
+  .sort((a, b) => b[1] - a[1]) // Sort by frequency
+  .slice(0, 15) // Limit to top 15
+  .map(entry => entry[0])
+  .sort(); // Sort alphabetically for UI
 
 // Discovery logic for cover images
 const allImages = import.meta.glob('/projects/**/*.{png,jpg,jpeg,webp}', { eager: true });
@@ -87,52 +96,57 @@ const getProjectCover = (slug: string) => {
 	</section>
 
 	<script>
-		const searchInput = document.getElementById('projectSearch') as HTMLInputElement;
-		const tagButtons = document.querySelectorAll('.filter-btn');
-		const projectCards = document.querySelectorAll('.project-card') as NodeListOf<HTMLElement>;
-		const noResults = document.getElementById('noResults');
+		function initFilters() {
+			const searchInput = document.getElementById('projectSearch') as HTMLInputElement;
+			const tagButtons = document.querySelectorAll('.filter-btn');
+			const projectCards = document.querySelectorAll('.project-card') as NodeListOf<HTMLElement>;
+			const noResults = document.getElementById('noResults');
 
-		let currentFilter = 'all';
-		let searchQuery = '';
+			let currentFilter = 'all';
+			let searchQuery = '';
 
-		function updateVisibility() {
-			let visibleCount = 0;
-			
-			projectCards.forEach(card => {
-				const title = card.dataset.title || '';
-				const tags = JSON.parse(card.dataset.tags || '[]');
+			function updateVisibility() {
+				let visibleCount = 0;
 				
-				const matchesFilter = currentFilter === 'all' || tags.includes(currentFilter);
-				const matchesSearch = title.includes(searchQuery.toLowerCase());
-				
-				if (matchesFilter && matchesSearch) {
-					card.classList.remove('hidden');
-					visibleCount++;
+				projectCards.forEach(card => {
+					const title = card.dataset.title || '';
+					const tags = JSON.parse(card.dataset.tags || '[]');
+					
+					const matchesFilter = currentFilter === 'all' || tags.includes(currentFilter);
+					const matchesSearch = title.includes(searchQuery.toLowerCase());
+					
+					if (matchesFilter && matchesSearch) {
+						card.classList.remove('hidden');
+						visibleCount++;
+					} else {
+						card.classList.add('hidden');
+					}
+				});
+
+				if (visibleCount === 0) {
+					noResults?.classList.remove('hidden');
 				} else {
-					card.classList.add('hidden');
+					noResults?.classList.add('hidden');
 				}
-			});
-
-			if (visibleCount === 0) {
-				noResults?.classList.remove('hidden');
-			} else {
-				noResults?.classList.add('hidden');
 			}
-		}
 
-		searchInput?.addEventListener('input', (e) => {
-			searchQuery = (e.target as HTMLInputElement).value;
-			updateVisibility();
-		});
-
-		tagButtons.forEach(btn => {
-			btn.addEventListener('click', () => {
-				tagButtons.forEach(b => b.classList.remove('active'));
-				btn.classList.add('active');
-				currentFilter = (btn as HTMLElement).dataset.tag || 'all';
+			searchInput?.addEventListener('input', (e) => {
+				searchQuery = (e.target as HTMLInputElement).value;
 				updateVisibility();
 			});
-		});
+
+			tagButtons.forEach(btn => {
+				btn.addEventListener('click', () => {
+					tagButtons.forEach(b => b.classList.remove('active'));
+					btn.classList.add('active');
+					currentFilter = (btn as HTMLElement).dataset.tag || 'all';
+					updateVisibility();
+				});
+			});
+		}
+
+		// Run on initial load and after View Transitions
+		document.addEventListener('astro:page-load', initFilters);
 	</script>
 
 	<style>
