@@ -1,6 +1,6 @@
 ---
 title: Mandir Design 3
-tags: ["Mandir", "Minimalist", "Compact"]
+tags: ["Mandir"]
 featured: false
 ---
 # Mandir Design 3

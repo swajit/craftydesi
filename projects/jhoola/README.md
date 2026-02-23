@@ -1,6 +1,6 @@
 ---
 title: Handcrafted Jhoola
-tags: ["Specialty", "Traditional", "Jhoola"]
+tags: ["Specialty", "Jhoola"]
 featured: true
 ---
 # Handcrafted Jhoola

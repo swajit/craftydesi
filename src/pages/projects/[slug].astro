@@ -24,6 +24,13 @@ const projectImages = Object.keys(allImages)
   .filter(path => path.includes(`/projects/${slug}/`))
   .map(path => (allImages[path] as any).default);
 
+const normalizeTag = (tag: string) => {
+  const trimmed = tag.trim();
+  if (trimmed === trimmed.toLowerCase()) {
+    return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+  }
+  return trimmed;
+};
 ---
 
 <Layout title={title}>
@@ -34,7 +41,7 @@ const projectImages = Object.keys(allImages)
 				<h1>{title}</h1>
 				{project.data.tags && (
 					<div class="tags">
-						{project.data.tags.map((tag: string) => <span class="tag">{tag}</span>)}
+						{project.data.tags.map((tag: string) => <span class="tag">{normalizeTag(tag)}</span>)}
 					</div>
 				)}
 			</div>

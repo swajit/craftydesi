@@ -1,6 +1,6 @@
 ---
 title: Built-in Mandir 2
-tags: ["Mandir", "Built-in", "Contemporary"]
+tags: ["Mandir", "Built-in"]
 featured: true
 ---
 # Built-in Mandir 2

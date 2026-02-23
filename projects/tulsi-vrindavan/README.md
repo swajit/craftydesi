@@ -1,6 +1,6 @@
 ---
 title: Tulsi Vrindavan
-tags: ["Specialty", "Traditional", "Planter"]
+tags: ["Specialty", "Planter"]
 featured: false
 ---
 # Tulsi Vrindavan

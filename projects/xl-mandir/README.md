@@ -1,6 +1,6 @@
 ---
 title: Heritage XL Mandir
-tags: ["Mandir", "Extra Large", "Statement Piece"]
+tags: ["Mandir"]
 featured: true
 ---
 # Heritage XL Mandir

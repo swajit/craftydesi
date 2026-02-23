@@ -1,6 +1,6 @@
 ---
 title: Dhol Toll Trolly
-tags: ["Specialty", "Cultural", "Mobile"]
+tags: ["Specialty"]
 featured: false
 ---
 # Dhol Toll Trolly

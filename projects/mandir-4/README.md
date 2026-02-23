@@ -1,6 +1,6 @@
 ---
 title: Multi-Tier Mandir
-tags: ["Mandir", "Multi-tier", "Modern"]
+tags: ["Mandir"]
 featured: false
 ---
 # Multi-Tier Mandir (Design 4)

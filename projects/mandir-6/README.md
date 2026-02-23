@@ -1,6 +1,6 @@
 ---
 title: Ornate Mandir Wall Unit
-tags: ["Mandir", "Wall-mounted", "Ornate"]
+tags: ["Mandir"]
 featured: false
 ---
 # Ornate Mandir Wall Unit (Design 6)

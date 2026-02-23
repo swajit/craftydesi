@@ -1,6 +1,6 @@
 ---
 title: Pani Poori Stall
-tags: ["Specialty", "Cultural", "Street Food"]
+tags: ["Specialty"]
 featured: true
 ---
 # Pani Poori Stall

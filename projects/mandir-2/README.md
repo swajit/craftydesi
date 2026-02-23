@@ -1,6 +1,6 @@
 ---
 title: Mandir Design 2
-tags: ["Mandir", "Custom", "Oak"]
+tags: ["Mandir"]
 featured: false
 ---
 # Mandir Design 2

@@ -1,6 +1,6 @@
 ---
 title: Scout Project 1
-tags: ["Specialty", "Community", "Service"]
+tags: ["Specialty", "Community"]
 featured: false
 ---
 # Scout Project 1

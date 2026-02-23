@@ -1,6 +1,6 @@
 ---
 title: Built-in Cabinets & Bookcase
-tags: ["Furniture", "Built-in", "Storage"]
+tags: ["Furniture", "Built-in"]
 featured: true
 ---
 # Built-in Cabinets & Bookcase

@@ -3,7 +3,16 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
-const tagCounts = allProjects.flatMap(p => p.data.tags || []).reduce((acc, tag) => {
+
+const normalizeTag = (tag: string) => {
+  const trimmed = tag.trim();
+  if (trimmed === trimmed.toLowerCase()) {
+    return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
+  }
+  return trimmed;
+};
+
+const tagCounts = allProjects.flatMap(p => (p.data.tags || []).map(normalizeTag)).reduce((acc, tag) => {
   acc[tag] = (acc[tag] || 0) + 1;
   return acc;
 }, {} as Record<string, number>);
@@ -56,7 +65,7 @@ const getProjectCover = (slug: string) => {
 					const slug = project.id.split('/')[0];
 					const title = project.data.title || slug.replace(/-/g, ' ');
 					const cover = getProjectCover(slug);
-					const tags = project.data.tags || [];
+					const tags = (project.data.tags || []).map(normalizeTag);
 					
 					return (
 						<a 

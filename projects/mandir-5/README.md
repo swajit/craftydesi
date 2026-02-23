@@ -1,6 +1,6 @@
 ---
 title: Traditional Stained Mandir
-tags: ["Mandir", "Stained", "Deep Walnut"]
+tags: ["Mandir"]
 featured: true
 ---
 # Traditional Stained Mandir (Design 5)

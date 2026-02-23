@@ -1,6 +1,6 @@
 ---
 title: Mandir Platform 1
-tags: ["Mandir", "Platform", "Minimalist"]
+tags: ["Mandir", "Platform"]
 featured: false
 ---
 # Mandir Platform 1

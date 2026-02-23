@@ -1,6 +1,6 @@
 ---
 title: Built-in Mandir 1
-tags: ["Mandir", "Built-in", "Custom Woodwork"]
+tags: ["Mandir", "Built-in", "Modern"]
 featured: true
 ---
 # Built-in Mandir 1

@@ -1,6 +1,6 @@
 ---
 title: Twin Office Desk
-tags: ["Furniture", "Office", "Minimalist"]
+tags: ["Furniture"]
 featured: false
 ---
 # Twin Office Desk

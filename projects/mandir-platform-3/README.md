@@ -1,6 +1,6 @@
 ---
 title: Premium Mandir Platform 3
-tags: ["Mandir", "Platform", "Premium"]
+tags: ["Mandir", "Platform"]
 featured: true
 ---
 # Premium Mandir Platform 3

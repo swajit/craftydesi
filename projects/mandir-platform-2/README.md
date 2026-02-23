@@ -1,6 +1,6 @@
 ---
 title: Custom Mandir Platform 2
-tags: ["Mandir", "Platform", "Handcrafted"]
+tags: ["Mandir", "Platform"]
 featured: false
 ---
 # Custom Mandir Platform 2

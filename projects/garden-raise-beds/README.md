@@ -1,6 +1,6 @@
 ---
 title: Garden Raised Beds
-tags: ["Outdoor", "Garden", "Sustainable"]
+tags: ["Outdoor", "Garden"]
 featured: false
 ---
 # Garden Raised Beds

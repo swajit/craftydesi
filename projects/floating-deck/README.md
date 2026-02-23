@@ -1,6 +1,6 @@
 ---
 title: Floating Deck & Pergola
-tags: ["Outdoor", "Deck", "Landscape"]
+tags: ["Outdoor", "Garden"]
 featured: true
 ---
 # Floating Deck & Pergola

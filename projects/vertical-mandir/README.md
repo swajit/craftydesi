@@ -1,6 +1,6 @@
 ---
 title: Vertical Space-Saver Mandir
-tags: ["Mandir", "Vertical", "Stained"]
+tags: ["Mandir"]
 featured: false
 ---
 # Vertical Space-Saver Mandir

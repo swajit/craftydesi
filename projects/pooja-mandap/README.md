@@ -1,6 +1,6 @@
 ---
 title: Elegant Pooja Mandap
-tags: ["Mandir", "Mandap", "Custom Woodwork"]
+tags: ["Mandir"]
 featured: true
 ---
 # Elegant Pooja Mandap

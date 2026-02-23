@@ -1,6 +1,6 @@
 ---
 title: Classic Mandir Design 1
-tags: ["Mandir", "Traditional", "Craftsmanship"]
+tags: ["Mandir"]
 featured: true
 ---
 # Classic Mandir Design 1

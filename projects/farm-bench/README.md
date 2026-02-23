@@ -1,6 +1,6 @@
 ---
 title: Handcrafted Farm Bench
-tags: ["Furniture", "Outdoor", "Rustic"]
+tags: ["Furniture", "Outdoor"]
 featured: false
 ---
 # Handcrafted Farm Bench

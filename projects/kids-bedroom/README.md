@@ -1,6 +1,6 @@
 ---
 title: Kids Bedroom Suite
-tags: ["Furniture", "Kids", "Bunk Bed"]
+tags: ["Furniture", "Built-in"]
 featured: true
 ---
 # Kids Bedroom Suite
